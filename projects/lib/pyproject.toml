@@ -10,12 +10,10 @@ dependencies = []
 torch-v1 = [
     "torch==1.12.1",
     "torchaudio==0.12.1",
-    "lib[torch-v1]",
 ]
 torch-v2 = [
     "torch~=2.3.1",
     "torchaudio~=2.3.1",
-    "lib[torch-v2]",
 ]
 
 [tool.uv]
@@ -25,11 +23,6 @@ conflicts = [
       { extra = "torch-v2" },
     ],
 ]
-
-[[tool.uv.index]]
-name = "pytorch-cpu"
-url = "https://download.pytorch.org/whl/cpu/"
-explicit = true
 
 [[tool.uv.index]]
 name = "pytorch-cu113"
@@ -43,12 +36,10 @@ explicit = true
 
 [tool.uv.sources]
 torch = [
-  { index = "pytorch-cpu", marker = "platform_system == 'Darwin'"},
   { index = "pytorch-cu113", extra = "torch-v1", marker = "platform_system != 'Darwin'"},
   { index = "pytorch-cu121", extra = "torch-v2", marker = "platform_system != 'Darwin'"},
 ]
 torchaudio = [
-  { index = "pytorch-cpu", marker = "platform_system == 'Darwin'"},
   { index = "pytorch-cu113", extra = "torch-v1", marker = "platform_system != 'Darwin'"},
   { index = "pytorch-cu121", extra = "torch-v2", marker = "platform_system != 'Darwin'"},
 ]
