@@ -9,17 +9,34 @@ dependencies = []
 [project.optional-dependencies]
 torch-v1 = [
     "lib[torch-v1]",
+    "torch==1.12.1+cu113",
+    "torchaudio==0.12.1+cu113",
 ]
 torch-v2 = [
     "lib[torch-v2]",
+    "torch==2.3.1+cu121",
+    "torchaudio==2.3.1+cu121",
 ]
 
 [tool.uv]
+environments = ["platform_system == 'Linux'"]
 conflicts = [
     [
       { extra = "torch-v1" },
       { extra = "torch-v2" },
     ],
 ]
+
+[[tool.uv.index]]
+name = "pytorch-all"
+url = "https://download.pytorch.org/whl/"
+explicit = true
+
 [tool.uv.sources]
 lib = { path = "../lib", editable = true }
+torch = [
+  { index = "pytorch-all" },
+]
+torchaudio = [
+  { index = "pytorch-all" },
+]

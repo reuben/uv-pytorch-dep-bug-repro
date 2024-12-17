@@ -8,15 +8,16 @@ dependencies = []
 
 [project.optional-dependencies]
 torch-v1 = [
-    "torch==1.12.1",
-    "torchaudio==0.12.1",
+    "torch==1.12.1+cu113",
+    "torchaudio==0.12.1+cu113",
 ]
 torch-v2 = [
-    "torch~=2.3.1",
-    "torchaudio~=2.3.1",
+    "torch==2.3.1+cu121",
+    "torchaudio==2.3.1+cu121",
 ]
 
 [tool.uv]
+environments = ["platform_system == 'Linux'"]
 conflicts = [
     [
       { extra = "torch-v1" },
@@ -25,21 +26,14 @@ conflicts = [
 ]
 
 [[tool.uv.index]]
-name = "pytorch-cu113"
-url = "https://download.pytorch.org/whl/cu113/"
-explicit = true
-
-[[tool.uv.index]]
-name = "pytorch-cu121"
-url = "https://download.pytorch.org/whl/cu121/"
+name = "pytorch-all"
+url = "https://download.pytorch.org/whl/"
 explicit = true
 
 [tool.uv.sources]
 torch = [
-  { index = "pytorch-cu113", extra = "torch-v1", marker = "platform_system != 'Darwin'"},
-  { index = "pytorch-cu121", extra = "torch-v2", marker = "platform_system != 'Darwin'"},
+  { index = "pytorch-all" },
 ]
 torchaudio = [
-  { index = "pytorch-cu113", extra = "torch-v1", marker = "platform_system != 'Darwin'"},
-  { index = "pytorch-cu121", extra = "torch-v2", marker = "platform_system != 'Darwin'"},
+  { index = "pytorch-all" },
 ]
